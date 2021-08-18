@@ -2,7 +2,7 @@ using System;
 
 namespace SchoolCore.Entities
 {
-    public class SchoolObjectBase
+    public abstract class SchoolObjectBase
     {
         public string UniqueId { get; private set; }
         public string Name { get; set; }
