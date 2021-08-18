@@ -31,10 +31,12 @@ namespace SchoolCore.Entities
 
         public void ClearPlace()
         {
+            Printer.Beep();
             Printer.DrawLine();
             Printer.WriteLine("Cleaning School");
             Grades.ForEach(grade => grade.ClearPlace());
-            Printer.WriteLine("The School is Clean");
+            Printer.DrawLine();
+            Printer.WriteTitle("The School is Clean");
         }
     }
 }
