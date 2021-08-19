@@ -54,20 +54,38 @@ namespace SchoolCore
 
         }
 
-        public List<SchoolObjectBase> GetSchoolObjects()
+        public List<SchoolObjectBase> GetSchoolObjects(out int evaluationCount, out int studentCount, out int courseCount, out int gradeCount, bool getEvaluation = true, bool getStudent = true, bool getCourses = true, bool getGrades = true)
         {
+            evaluationCount = 0;
+            studentCount = 0;
+            courseCount = 0;
+            gradeCount = 0;
             var objList = new List<SchoolObjectBase>();
             objList.Add(School);
-            objList.AddRange(School.Grades);
-
+            if (getGrades)
+            {
+                objList.AddRange(School.Grades);
+            }
+            gradeCount = School.Grades.Count;
             foreach (var grade in School.Grades)
             {
-                objList.AddRange(grade.Courses);
-                objList.AddRange(grade.Students);
-
-                foreach (var student in grade.Students)
+                courseCount = grade.Courses.Count;
+                if (getCourses)
                 {
-                    objList.AddRange(student.Evaluations);
+                    objList.AddRange(grade.Courses);
+                }
+                studentCount = grade.Students.Count;
+                if (getStudent)
+                {
+                    objList.AddRange(grade.Students);
+                }
+                if (getEvaluation)
+                {
+                    foreach (var student in grade.Students)
+                    {
+                        objList.AddRange(student.Evaluations);
+                        evaluationCount += student.Evaluations.Count;
+                    }
                 }
             }
 

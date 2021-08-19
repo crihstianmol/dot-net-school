@@ -16,15 +16,6 @@ namespace SchoolCore
             Printer.WriteTitle("Welcome to " + engine.School.Name);
             PrintSchoolGrades(engine.School);
             var objList = engine.GetSchoolObjects();
-
-            var iPlaceList = from obj in objList
-                             where obj is Student
-                             select (Student)obj;
-            foreach (var item in iPlaceList)
-            {
-                Printer.WriteLine(item.Name);
-            }
-
             // engine.School.ClearPlace();
         }
 
