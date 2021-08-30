@@ -15,7 +15,7 @@ namespace SchoolCore
             engine.Initialize();
             Printer.WriteTitle("Welcome to " + engine.School.Name);
             PrintSchoolGrades(engine.School);
-            var objList = engine.GetSchoolObjects();
+            var objList = engine.GetSchoolObjects(out int evaluationCount, out int studentCount, out int courseCount, out int gradeCount);
             // engine.School.ClearPlace();
         }
 

@@ -54,6 +54,10 @@ namespace SchoolCore
 
         }
 
+        public List<SchoolObjectBase> GetSchoolObjects(bool getEvaluation = true, bool getStudent = true, bool getCourses = true, bool getGrades = true)
+        {
+            return this.GetSchoolObjects(out int dummy, out dummy, out dummy, out dummy, getEvaluation, getStudent, getCourses, getGrades);
+        }
         public List<SchoolObjectBase> GetSchoolObjects(out int evaluationCount, out int studentCount, out int courseCount, out int gradeCount, bool getEvaluation = true, bool getStudent = true, bool getCourses = true, bool getGrades = true)
         {
             evaluationCount = 0;
