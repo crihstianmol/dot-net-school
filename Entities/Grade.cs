@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SchoolCore.Util;
 namespace SchoolCore.Entities
 {
-    public class Grade:SchoolObjectBase, iPlace
+    public class Grade:SchoolBaseObject, iPlace
     {
         public string Address { get; set; }
         public JournalTypes Journal { get; set; }

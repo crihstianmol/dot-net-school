@@ -4,7 +4,7 @@ using SchoolCore.Util;
 
 namespace SchoolCore.Entities
 {
-    public class School : SchoolObjectBase, iPlace
+    public class School : SchoolBaseObject, iPlace
     {
         public int FoundationYear { get; set; }
         public string Address { get; set; }

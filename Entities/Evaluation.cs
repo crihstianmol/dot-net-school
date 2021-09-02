@@ -2,7 +2,7 @@ using System;
 
 namespace SchoolCore.Entities
 {
-    public class Evaluation:SchoolObjectBase
+    public class Evaluation:SchoolBaseObject
     {
         public Student Student { get; set; }
         public Course Course  { get; set; }
