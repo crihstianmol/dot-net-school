@@ -27,10 +27,23 @@ namespace SchoolCore
             LoadEvaluations();
         }
 
-        public Dictionary<string,IEnumerable<SchoolBaseObject>> GetObjectDictionary(){
-            var dic = new Dictionary<string,IEnumerable<SchoolBaseObject>>();
-            dic.Add("School",new [] {this.School});
-            dic.Add("School Grades",this.School.Grades.Cast<SchoolBaseObject>());
+        public Dictionary<DictionaryKeys, IEnumerable<SchoolBaseObject>> GetObjectDictionary()
+        {
+            var dic = new Dictionary<DictionaryKeys, IEnumerable<SchoolBaseObject>>();
+            dic.Add(DictionaryKeys.School, new[] { this.School });
+            dic.Add(DictionaryKeys.Grades, this.School.Grades.Cast<SchoolBaseObject>());
+            var ListStudents = new List<Student>();
+            var ListCourses = new List<Course>();
+            var ListEvaluations = new List<Evaluation>();
+            foreach (var grades in this.School.Grades)
+            {
+                ListCourses.AddRange(grades.Courses);
+                ListStudents.AddRange(grades.Students);
+                grades.Students.ForEach(stud => { ListEvaluations.AddRange(stud.Evaluations); });
+            }
+            dic.Add(DictionaryKeys.Courses, ListCourses.Cast<SchoolBaseObject>());
+            dic.Add(DictionaryKeys.Students, ListStudents.Cast<SchoolBaseObject>());
+            dic.Add(DictionaryKeys.Evaluations, ListEvaluations.Cast<SchoolBaseObject>());
             return dic;
         }
 
@@ -47,13 +60,14 @@ namespace SchoolCore
                         for (int i = 0; i < 5; i++)
                         {
                             var ev =
-                                new Evaluation {
+                                new Evaluation
+                                {
                                     Course = course,
                                     Name = $"{course.Name} Ev#{i + 1}",
                                     Score = (float)(5 * rnd.NextDouble()),
                                     Student = student
                                 };
-                            student.Evaluations.Add (ev);
+                            student.Evaluations.Add(ev);
                         }
                     }
                 }
@@ -96,7 +110,7 @@ namespace SchoolCore
             courseCount = 0;
             gradeCount = 0;
             var objList = new List<SchoolBaseObject>();
-            objList.Add (School);
+            objList.Add(School);
             if (getGrades)
             {
                 objList.AddRange(School.Grades);

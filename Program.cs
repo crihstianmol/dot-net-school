@@ -15,9 +15,14 @@ namespace SchoolCore
             engine.Initialize();
             Printer.WriteTitle("Welcome to " + engine.School.Name);
             PrintSchoolGrades(engine.School);
-            Dictionary<int, string> diccionario = new Dictionary<int, string>();
-            diccionario.Add(1,"Crihstian");
-            diccionario.Add(2,"Alejandro");
+            var dic = engine.GetObjectDictionary();
+            foreach (var item in dic)
+            {
+                foreach (var obj in item.Value)
+                {
+                    Printer.WriteTitle(obj.Name);
+                }
+            }
         }
 
         private static void PrintSchoolGrades(School school)
