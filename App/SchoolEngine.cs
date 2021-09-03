@@ -33,30 +33,28 @@ namespace SchoolCore
             foreach (var obj in dic)
             {
                 Printer.WriteLine(obj.Key.ToString());
-                foreach (var listVal in obj.Value)
+                foreach (var objVal in obj.Value)
                 {
-                    if (listVal is Evaluation)
+                    switch (objVal)
                     {
-                        var eval = (Evaluation)listVal;
-                        Printer.WriteLine("Evaluation: " +eval.ToString());
+                        case Evaluation evaluation:
+                            Printer.WriteLine("Evaluation: " + evaluation.ToString());
+                            break;
+                        case Course course:
+                            Printer.WriteLine("Course: " + course.ToString());
+                            break;
+                        case Grade grade:
+                            Printer.WriteLine("Grade: " + grade.ToString());
+                            break;
+                        case School school:
+                            Printer.WriteLine("School: " + school.ToString());
+                            break;
+                        case Student student:
+                            Printer.WriteLine("Student: " + student.ToString());
+                            break;
+                        default:
+                            break;
                     }
-                    
-                    if (listVal is Student)
-                    {
-                        var eval = (Student)listVal;
-                        Printer.WriteLine("Student: " +eval.ToString());
-                    }
-                    if (listVal is Course)
-                    {
-                        var eval = (Course)listVal;
-                        Printer.WriteLine("Course: " +eval.ToString());
-                    }
-                    if (listVal is Grade)
-                    {
-                        var eval = (Grade)listVal;
-                        Printer.WriteLine("Grade: " +eval.ToString());
-                    }
-
                 }
             }
         }
@@ -82,14 +80,13 @@ namespace SchoolCore
 
         private void LoadEvaluations()
         {
+            var rnd = new Random();
             foreach (var grade in School.Grades)
             {
                 foreach (var course in grade.Courses)
                 {
                     foreach (var student in grade.Students)
                     {
-                        var rnd = new Random(System.Environment.TickCount);
-
                         for (int i = 0; i < 5; i++)
                         {
                             var ev =
@@ -97,7 +94,7 @@ namespace SchoolCore
                                 {
                                     Course = course,
                                     Name = $"{course.Name} Ev#{i + 1}",
-                                    Score = (float)(5 * rnd.NextDouble()),
+                                    Score = (float)Math.Round(5 * rnd.NextDouble(), 2),
                                     Student = student
                                 };
                             student.Evaluations.Add(ev);
