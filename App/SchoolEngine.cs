@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SchoolCore.Entities;
+using SchoolCore.Util;
 
 namespace SchoolCore
 {
@@ -27,6 +28,38 @@ namespace SchoolCore
             LoadEvaluations();
         }
 
+        public void PrintDictionary(Dictionary<DictionaryKeys, IEnumerable<SchoolBaseObject>> dic)
+        {
+            foreach (var obj in dic)
+            {
+                Printer.WriteLine(obj.Key.ToString());
+                foreach (var listVal in obj.Value)
+                {
+                    if (listVal is Evaluation)
+                    {
+                        var eval = (Evaluation)listVal;
+                        Printer.WriteLine("Evaluation: " +eval.ToString());
+                    }
+                    
+                    if (listVal is Student)
+                    {
+                        var eval = (Student)listVal;
+                        Printer.WriteLine("Student: " +eval.ToString());
+                    }
+                    if (listVal is Course)
+                    {
+                        var eval = (Course)listVal;
+                        Printer.WriteLine("Course: " +eval.ToString());
+                    }
+                    if (listVal is Grade)
+                    {
+                        var eval = (Grade)listVal;
+                        Printer.WriteLine("Grade: " +eval.ToString());
+                    }
+
+                }
+            }
+        }
         public Dictionary<DictionaryKeys, IEnumerable<SchoolBaseObject>> GetObjectDictionary()
         {
             var dic = new Dictionary<DictionaryKeys, IEnumerable<SchoolBaseObject>>();
