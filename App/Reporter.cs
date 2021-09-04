@@ -50,7 +50,7 @@ namespace SchoolCore
             }
             return evDic;
         }
-        public Dictionary<String, IEnumerable<object>> GetEvalPromByCourse()
+        public Dictionary<String, IEnumerable<object>> GetEvalAverageByCourse()
         {
             var evDic = new Dictionary<String, IEnumerable<object>>();
             var courseList = GetEvaluationByCourse();

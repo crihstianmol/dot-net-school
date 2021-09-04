@@ -14,9 +14,11 @@ namespace SchoolCore
             var engine = new SchoolEngine();
             engine.Initialize();
             Printer.WriteTitle("Welcome to " + engine.School.Name);
-            // engine.PrintDictionary(engine.GetObjectDictionary());
             var reporter = new Reporter(engine.GetObjectDictionary());
-            var x = reporter.GetEvalPromByCourse();
+            var evList = reporter.GetEvaluationList();
+            var courseList = reporter.GetCourseList();
+            var evXCourseList = reporter.GetEvaluationByCourse();
+            var aveXCourseList = reporter.GetEvalAverageByCourse();
         }
 
         private static void PrintSchoolGrades(School school)
